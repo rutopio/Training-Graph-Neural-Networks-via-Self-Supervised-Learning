@@ -1,4 +1,4 @@
-# Training-Graph-Neural-Networks-via-Self-Supervised-Learning-Experiments-and-Analysis
+# Training Graph Neural Networks via Self-Supervised Learning Experiments and Analysis
 
 - Letest Update: June 6th, 2022
 
@@ -28,7 +28,7 @@
     - $g(\cdot)$: Projection Head
 
 - Cosine Similarity: 
-    
+  
     $$\textbf{sim}(\textbf{u},\textbf{v})=\textbf{u}^T\textbf{v}/ (\|\textbf{u}\|_2\|\textbf{v}\|_2)$$
     
 - Contrastive Loss Function: NT-Xent
@@ -118,7 +118,7 @@
 
 
 - Innovative Loss Function  
-    
+  
     $\lambda$: a positive constant trading off the importance of the first and second terms of the loss.
     
     
