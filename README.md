@@ -28,10 +28,12 @@
     - $g(\cdot)$: Projection Head
 
 - Cosine Similarity: 
-    - $$\textbf{sim}(\textbf{u},\textbf{v})=\textbf{u}^T\textbf{v}/ (\|\textbf{u}\|_2\|\textbf{v}\|_2)$$
-
+    
+    $$\textbf{sim}(\textbf{u},\textbf{v})=\textbf{u}^T\textbf{v}/ (\|\textbf{u}\|_2\|\textbf{v}\|_2)$$
+    
 - Contrastive Loss Function: NT-Xent
-  - $$\mathcal{loss}(i,j)=-\log\frac{\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j})/\tau\big)}{\sum^{2N}_{k=1}\mathbb{1}_{[k\neq i]}\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j}/\tau)\big)}$$
+  
+  $$\mathcal{loss}(i,j)=-\log\frac{\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j})/\tau\big)}{\sum^{2N}_{k=1}\mathbb{1}_{[k\neq i]}\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j}/\tau)\big)}$$
 
 ***
 
@@ -48,9 +50,11 @@
 
 - Loss Function:
 
-  - $$\mathcal{loss}(\mathbf{z}_t,\mathbf{q}_s)=-\sum_k\mathbf{q}^{(k)}_s\log\mathbf{p}_t^{(k)}$$
+  $$\mathcal{loss}(\mathbf{z}_t,\mathbf{q}_s)=-\sum_k\mathbf{q}^{(k)}_s\log\mathbf{p}_t^{(k)}$$
 
-  - $$\mathbf{p}_t^{(k)}=\frac{\exp\big(\frac{1}{\tau}\mathbf{z}^T_t\cdot\mathbf{c}_k\big)}{\sum_k \exp\big(\frac{1}{\tau}\mathbf{z}^T_t\cdot\mathbf{c}_k^{'}\big)}$$
+  
+  
+  $$\mathbf{p}_t^{(k)}=\frac{\exp\big(\frac{1}{\tau}\mathbf{z}^T_t\cdot\mathbf{c}_k\big)}{\sum_k \exp\big(\frac{1}{\tau}\mathbf{z}^T_t\cdot\mathbf{c}_k^{'}\big)}$$
 
 ***
 
@@ -104,15 +108,19 @@
     
 - Cross-correlation Matrix 交互相關矩陣
     - $b$: indexes batch samples
+    
     - $i, j$: index the vector dimension of the networks’ output
     
-    - $$\mathcal{C}_{ij}=\frac{\sum_b\big(z^A_{b,i}\big)\cdot\big(z^B_{b,j}\big)}{\sqrt{\sum_b\big(z^A_{b,i}\big)}\cdot\sqrt{\sum_b\big(z^B_{b,j}\big)}}$$
+      $$\mathcal{C}_{ij}=\frac{\sum_b\big(z^A_{b,i}\big)\cdot\big(z^B_{b,j}\big)}{\sqrt{\sum_b\big(z^A_{b,i}\big)}\cdot\sqrt{\sum_b\big(z^B_{b,j}\big)}}$$
     
-    - $$\mathcal{C}\in\{-1(\text{perfect correlation}),1(\text{perfect anti-correlation})\}$$
+      $$\mathcal{C}\in\{-1(\text{perfect correlation}),1(\text{perfect anti-correlation})\}$$
 
 
 
 - Innovative Loss Function  
-    - $\lambda$: a positive constant trading off the importance of the first and second terms of the loss
     
-    - $$\mathcal{D}=\underbrace{\sum_i(1-\mathcal{C}_{ii})^2}_{\text{invariance term}}+\lambda\underbrace{\sum_i\sum_{i\neq j}\mathcal{C}_{ij}^2}_{\text{redundancy reduction term}}$$
+    $\lambda$: a positive constant trading off the importance of the first and second terms of the loss.
+    
+    
+    
+    $$\mathcal{D}=\underbrace{\sum_i(1-\mathcal{C}_{ii})^2}_{\text{invariance term}}+\lambda\underbrace{\sum_i\sum_{i\neq j}\mathcal{C}_{ij}^2}_{\text{redundancy reduction term}}$$
