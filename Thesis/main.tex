@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+
+\usepackage[english]{babel}			
+\usepackage[utf8]{inputenc}									
+\usepackage[T1]{fontenc}									
+\usepackage{tabularx}
+\usepackage{amsmath, amsthm, amssymb}   
+\usepackage{ulem, CJKulem}              
+\usepackage{booktabs}                  
+\usepackage{multirow}   
+\usepackage{multicol}
+\usepackage{diagbox}                   
+\usepackage{array}                    
+\usepackage{longtable}                
+\usepackage{paralist}              
+\usepackage{makecell}
+\usepackage{chngpage}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[backref]{hyperref}
+\usepackage{caption} 
+\captionsetup[table]{skip=10pt}
+\usepackage{subfig, epsfig, tikz, float}		
+\usepackage[square]{natbib}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\textwidth 13.5cm
+\textheight 19.5cm
+\columnsep .5cm
+
+\title{
+\renewcommand{\baselinestretch}{1.17}\normalsize\bf%
+\uppercase{Training Graph Neural Networks via Self-Supervised Learning: Experiments and Analysis}
+}
+
+\author{Ho Ching-Ru$^{*}$}
+
+\begin{document}
+
+\date{}
+\maketitle
+
+\vspace{-0.5cm}
+
+\begin{center}
+{\footnotesize 
+$^{*}$M.S. in Data Science Degree Program,\\ National Taiwan University and Academia Sinica.  \\
+E-mail: r09946006@ntu.edu.tw \\
+Advisor: Yen Tso-Jung (Institute of Statistical Science, Academia Sinica)\\
+Oral Exam Date: July 4th, 2022
+}
+\end{center}
+
+\bigskip
+\input{front/abstract.tex}
+
+\medskip
+{\small{\bf Keywords}{:} 
+self-supervised learning, graph neural network, encoder training
+}
+
+\baselineskip=\normalbaselineskip
+
+\input{contents/chapter01.tex}
+\newpage
+\input{contents/chapter02.tex}
+\newpage
+\input{contents/chapter03.tex}
+\newpage
+\input{contents/chapter04.tex}
+\newpage
+\input{contents/chapter05.tex}
+\newpage
+\input{back/appendix01.tex}
+\newpage
+\bibliographystyle{ieeetr} 
+\newpage
+\bibliography{ref.bib} 
+
+\end{document}

@@ -1,6 +1,10 @@
 # Training Graph Neural Networks via Self-Supervised Learning Experiments and Analysis
 
-- Letest Update: June 6th, 2022
+- Arthor: Ho Ching-Ru (M.S. in Data Science Degree Program, National Taiwan University and Academia Sinica.) 
+- Advisor: Yen Tso-Jung (Institute of Statistical Science, Academia Sinica)
+- Email: r09946006@ntu.edu.tw
+- Latest Update:  January 17th, 2023
+- Code Update: June 6th, 2022
 
 
 
@@ -10,7 +14,7 @@
 
 ## Contrastive Learning
 
-![](https://miro.medium.com/max/911/1*pwIufoZNu2wanqtBQdIrQQ.gif)
+![](images/demo.gif)
 
 - e.g. **SimCLR**, MoCo
 
@@ -33,7 +37,7 @@
     
 - Contrastive Loss Function: NT-Xent
   
-  $$\mathcal{loss}(i,j)=-\log\frac{\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j})/\tau\big)}{\sum^{2N}_{k=1}\mathbb{1}_{[k\neq i]}\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j}/\tau)\big)}$$
+  $$\textbf{loss}(i,j)=-\log\frac{\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j})/\tau\big)}{\sum^{2N}_{k=1}\mathbb{1}_{[k\neq i]}\exp\big(\textbf{sim}(\textbf{z}_{i},\textbf{z}_{j}/\tau)\big)}$$
 
 ***
 
@@ -50,7 +54,7 @@
 
 - Loss Function:
 
-  $$\mathcal{loss}(\mathbf{z}_t,\mathbf{q}_s)=-\sum_k\mathbf{q}^{(k)}_s\log\mathbf{p}_t^{(k)}$$
+  $$\textbf{loss}(\mathbf{z}_t,\mathbf{q}_s)=-\sum_k\mathbf{q}^{(k)}_s\log\mathbf{p}_t^{(k)}$$
 
   
   
@@ -81,9 +85,9 @@
 
 - Negative Cosine similarity:
 
-    - $$\mathcal{D}(p_1, z_2)=-\bigg(\frac{p_1}{\|p_1\|_2}\cdot\frac{z_2}{\|z_2\|_2}\bigg)$$
+    - $$\textbf{D}(p_1, z_2)=-\bigg(\frac{p_1}{\|p_1\|_2}\cdot\frac{z_2}{\|z_2\|_2}\bigg)$$
 
-    - $$\mathcal{D}\in\{-1(\text{absoulty the same}),0(\text{absoulty different})\}$$
+    - $$\textbf{D}\in\{-1(\text{absoulty the same}),0(\text{absoulty different})\}$$
 
 ***
 
@@ -111,9 +115,9 @@
     
     - $i, j$: index the vector dimension of the networks’ output
     
-      $$\mathcal{C}_{ij}=\frac{\sum_b\big(z^A_{b,i}\big)\cdot\big(z^B_{b,j}\big)}{\sqrt{\sum_b\big(z^A_{b,i}\big)}\cdot\sqrt{\sum_b\big(z^B_{b,j}\big)}}$$
+      $$\textbf{C}_{ij}=\frac{\sum_b\big(z^A_{b,i}\big)\cdot\big(z^B_{b,j}\big)}{\sqrt{\sum_b\big(z^A_{b,i}\big)}\cdot\sqrt{\sum_b\big(z^B_{b,j}\big)}}$$
     
-      $$\mathcal{C}\in\{-1(\text{perfect correlation}),1(\text{perfect anti-correlation})\}$$
+      $$\textbf{C}\in\{-1(\text{perfect correlation}),1(\text{perfect anti-correlation})\}$$
 
 
 
@@ -123,4 +127,4 @@
     
     
     
-    $$\mathcal{D}=\underbrace{\sum_i(1-\mathcal{C}_{ii})^2}_{\text{invariance term}}+\lambda\underbrace{\sum_i\sum_{i\neq j}\mathcal{C}_{ij}^2}_{\text{redundancy reduction term}}$$
+    $$\textbf{D}=\underbrace{\sum_i(1-\textbf{C}_{ii})^2}_{\text{invariance term}}+\lambda\underbrace{\sum_i\sum_{i\neq j}\textbf{C}_{ij}^2}_{\text{redundancy reduction term}}$$
