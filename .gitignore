@@ -1,3 +1,5 @@
 **/*.ttf
 **/*.otf
 Thesis/fonts
+.DS_Store
+**/.DS_Store
