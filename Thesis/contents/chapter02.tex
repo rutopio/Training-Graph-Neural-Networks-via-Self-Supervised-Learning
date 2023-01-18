@@ -1,15 +1,13 @@
 
 % !TeX root = ../main.tex
 
-\section{Literature Reviews}\label{sec:2}
+\chapter{Literature Reviews}
 
 In this chapter, we review recent developments in self-supervised learning and graph neural networks.  
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Self-supervised Learning}
+
+\section{Self-supervised Learning}
 
 Supervised learning is the most widely adopted ML approach for training deep neural networks (DNNs). However, it requires large amounts of labeled data for success. Due to the limited human resources and computing power, it is difficult to obtain large amounts of labeled data. Because of this difficulty, self-supervised learning has received significant attention in recent years. 
 
@@ -17,12 +15,9 @@ Being a branch of unsupervised learning, self-supervised learning trains models 
 
 Several methods based on self-supervised learning have been developed in recent years. In 2018, a memory bank \cite{MemoryBank} structure was introduced into machine learning. Researchers use the convolutional neural network (CNN) backbone to generate high-dimension features of original images, store these features in a memory bank, and then use a non-parametric softmax classifier with NCE loss and proximal regularization to calculate the probability of prediction and train an encoder. This process is regarded as the basis of contrastive learning \cite{hassani2020contrastive}.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Based on the memory bank architecture, MoCo (\textit{Momentum Contrast}) \cite{MoCo, MoCov2} uses a specific momentum-updated encoder, a memory bank, and a dynamic queue used for generating negative samples. MoCo performs the learning procedure by comparing positive and negative sample pairs. MoCo can produce models that outperform supervised models in several ImageNet-related tasks. 
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -37,16 +32,13 @@ In MoCo and SimCLR, the distance between each pair of projections is calculated,
 
 DeepCluster \cite{DeepClustering} introduces a clustering module into the latent feature layer. Features generated from input images will be separated into various clusters. After the pseudo-labeling stage, each cluster will be regarded as a unique class. The model will train the encoder via backpropagation.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 To prevent mapping all data points to the same cluster, SeLa (\textit{Self Labelling}) \cite{SeLa} adds some constraints on a label by maximizing the information between the label and input data. Furthermore, SeLa uses the Sinkhorn–Knopp algorithm to speed up the self-labeling process and reduce the training time.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 SwAV (\textit{Swapping Assignments Between Views}) \cite{SwAV} computes encoded probability by matching projections to prototype clusters. SwAV adopts one's assignment to predict the projection of another by swapping cluster assignments between different images. 
-
 
 Contrastive and clustering learning are powerful self-supervised learning approaches. However, they require a large number of negative samples to train an encoder. Without negative samples, an encoder can only be trained with positive representation information, causing a trained model to easily converge to a trivial solution or suffer from gradient collapse. 
 
@@ -54,25 +46,19 @@ Contrastive and clustering learning are powerful self-supervised learning approa
 
 To tackle this problem, BYOL (\textit{Bootstrap Your Own Latent}) \cite{BYOL} connects a predictor to the projector in the MoCo architecture. The predictor learns by mapping projection from an online network (student encoder) to a target network (teacher encoder, similar to the momentum encoder in MoCo). In addition, only the online network is updated via backpropagation during training. The target network is updated using a stop-gradient mechanism and an exponential average of the online network. In this sense, BYOL can also be regarded as a special type of distillation learning approach. 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Another distillation learning method is called Simsiam (\textit{Simple Siamese Representation Learning}) \cite{Simsiam}. Simsiam is inspired by BYOL, but unlike BYOL, the former simplifies the prototype of the online and target networks by removing the momentum-updated target encoder and connecting the target network directly to the online network. 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Negative samples are not required in distillation learning methods such as BYOL and Simsiam. Instead, they used the predictor and stop-gradient mechanism to train a powerful encoder.
 
-
 As discussed above, the contrastive, clustering, and distillation learning approaches train an encoder from the sample projection. Barlow Twins \cite{BarlowTwins}, another self-supervised learning method, starts from another perspective. Inspired by neuroscientist H. Barlow's redundancy reduction principle, Barlow Twins uses the embedding without considering negative samples or momentum average. It focuses on training an encoder that can yield data representation without redundant components. Barlow Twins can also achieve good performance on ImageNet-related tasks.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Self-supervised learning has made remarkable progress in recent years. Table \ref{tab:methods} shows the learning approaches and methods to which they belong.
-
-
 
 
 
@@ -108,16 +94,11 @@ Redundancy Reduction& \makecell[l]{Barlow Twins (Zbontar et al., 2021 \cite{Barl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Graph Neural Networks (GNN)}
-
+\section{Graph Neural Networks (GNN)}
 
 A graph is a type of data structure for non-tablize information. It is commonly seen in knowledge graph \cite{knowledge}, social network \cite{social}, recommendation system \cite{recommender}, combinatorial optimization \cite{combinatorial}, particle simulation \cite{particle}, molecule discovery \cite{antibiotic}, and many other machine learning related tasks. Owing to its specific structure, we can use a neighborhood aggregation and message passing scheme to capture information within nodes' neighborhoods, which can preserve the relationship between each node and edge rather than use the table format \cite{comprehensive}..
 
-
 Consider a graph $\mathcal{G} = (\mathcal{V},\mathcal{E})$, where $\mathcal{V}$ denotes a set of nodes and $\mathcal{E}$ denotes a set of edges. Let $\mathcal{N}_{u}$ denote a node set of nodes adjacent to node $u\in \mathcal{V}$. We can obtain the $\mathbf{h}_{u}^{(k)}$, the feature vector of node $u$ at the $k$th layer, via the following operators:
-
-
-
 
 \begin{equation}
 \mathbf{h}_{u}^{(k)}=\text{COMBINE}^{(k)}\Big(\mathbf{h}_{u}^{(k-1)},\mathbf{a}_{u}^{(k)}\Big),
@@ -133,41 +114,29 @@ During the iteration of neural networks, the $\text{AGGREGATE}(\cdot)$ operator 
 
 After generating each feature of nodes using a $K$-layer GNN, we can use a $\text{READOUT}(\cdot)$ operator to obtain the entire graph embedding $\mathbf{h}$ of $\mathcal{G}$:
 
-
 \begin{equation}
 \mathbf{h}=\text{READOUT}\Big(\{\mathbf{h}_{u}^{(K)}, \forall u\in\mathcal{V}\}\Big).
 \end{equation}
 
-
 Based on the use of different $\text{COMBINE}(\cdot)$ and $\text{AGGREGATE}(\cdot)$ operators, several architectures for encoding graph data have been proposed. For example, GraphSAGE \cite{GraphSAGE} uses element-wise max-pooling $\text{MAX}(\cdot)$ with a non-linear function $\sigma(\cdot)$, such as ReLu or sigmoid function, as the $\text{AGGREGATE}(\cdot)$ operator and concatenates the aggregation vector and $k-1$th feature vector to obtain the updating feature:
-
-
-
 
 \begin{equation}
 \textbf{a}_{u}^{(k)}={\text{MAX}\Big(\Big\{\sigma(\Theta^{(k)}\cdot\textbf{h}_{v}^{(k-1)}),\forall v\in\mathcal{N}_{u}\Big\}\Big)},
 \end{equation}
 
-
 \begin{equation}
 \mathbf{h}_{u}^{(k)}={\text{CONCAT}\Big(\mathbf{h}_{u}^{(k-1)}, \textbf{a}_{u}^{(k)}\Big)}.
 \end{equation}
-
 
 where $\Theta^{(k)}$ is a learnable weight matrix.
 
 By contrast, Graph Convolutional Networks (GCN) \cite{GCN} use element-wise mean pooling $\text{MEAN}(\cdot)$ for information propagation, and the $\text{AGGREGATE}(\cdot)$ and $\text{COMBINE}(\cdot)$ functions are integrated as follows:
 
-
-
 \begin{equation}
 \mathbf{h}_{u}^{(k)}=\text{ReLu}\Big(\Theta^{(k)}\cdot\text{MEAN}\Big\{\mathbf{h}_{v}^{(k-1}, \forall v\in\mathcal{N}_{u}\cup\{u\}\Big\}\Big).
 \end{equation}
 
-
-
 Furthermore, Graph Isomorphism Network (GIN) \cite{GIN} use multilayer perceptrons (MLPs) for information propagation because they can represent a good function composition. The iteration function can be represented as
-
 
 \begin{equation}
 \textbf{a}_{u}^{(k)}=\Big(\sum_{v\in\mathcal{N}_{u}}\mathbf{h}_{v}^{(k-1)}\Big),
@@ -183,14 +152,11 @@ Furthermore, Graph Isomorphism Network (GIN) \cite{GIN} use multilayer perceptro
 
 where $\epsilon$ can be a learnable parameter or a fixed scalar. 
 
-
-
 In this thesis, we will choose Graph Isomorphism Network as the main encoder for encoding graph data. The details are presented in Table  \ref{tab:expfactor}.
 
 
 
-\subsection{Discussion}
-
+\section{Discussion}
 
 In this chapter, we have described the basic idea of self-supervised learning. Furthermore, we have reviewed several benchmark GNN models, including GraphSAGE, Graph Convolutional Networks, and Graph Isomorphism Networks. 
 

@@ -2,13 +2,21 @@
 
 \begin{abstract}
 
+隨著我們在機器學習領域的了解日趨深入，將大量已標記的樣本作為訓練對象的監督式學習正被廣泛地應用在各式各樣的情境與任務當中。然而，對於那些僅有部分樣本帶有標記的資料集，要如何在有限的時間和資源裡，讓電腦能從中學習相關的特徵並加以應用，便成為了一個值得研究的新問題。
+
+「自監督學習」提供了可能的解決方案。和監督式學習不同的是，在自監督學習中，我們無需大量的事前作業，只需將少量已標記的樣本送入模型，模型即可從中自我學習、生成標記，進而達到、甚至超越監督學習下的結果。目前，自監督學習的研究與應用大多環繞著電腦視覺與自然語言處理，對於「圖」這種資料結構的了解仍處於起步的摸索階段。
+
+在本篇論文中，我們將深入探討圖資料結構下的自監督學習模型，藉由實驗不同的方法與參數，對結果提出可能性的推測：包括使用較深的編碼器架構可以得到較佳的結果、在中小型資料集中提高隱藏維度對預測效果的提升有限、不同的資料擴增方式和模型在化學與生物資訊類別的資料集當中，會產生不同的效果等。
+
+\end{abstract}
+
+
+\begin{abstract*}
+
 Supervised learning is a popular model training method. However, its success relies on the use of huge amounts of labeled data. Recent advances in self-supervised learning have provided researchers with a means to train models on data in which only a few labeled observations are required. Self-supervised learning is efficient because it can perform model training without requiring a large amount of preprocessed data. State-of-the-art self-supervised models can achieve, even exceed, the performance of supervised models.
-
-
 
 Most studies on self-supervised learning have been conducted in the fields of computer vision and natural language processing. Meanwhile, self-supervised learning on graph data is still nascent. In this thesis, we explored self-supervised learning for training graph neural networks (GNNs). We conducted experiments by training GNN models on four molecular and bioinformatics datasets in different experimental settings. Furthermore, we provided possible explanations for the experiment results. 
 
-
 We found that models with a deeper encoder structure can obtain superior results. However, increasing the hidden dimension size when a model is trained on small or medium-size datasets can only result in little improvement. By contrast, different data augmentation methods and different types of models can yield different results on molecular and bioinformatics datasets.
 
-\end{abstract}
+\end{abstract*}

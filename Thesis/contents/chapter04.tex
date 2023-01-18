@@ -1,10 +1,8 @@
 % !TeX root = ../main.tex
 
-\section{Results and Discussion}\label{sec:4}
-
+\chapter{Results and Discussion}
 
 In this chapter, we will discuss the results of the simulation experiments we described in Chapter 3. Table \ref{tab:result} shows the best results from the 144 experiments on the test dataset between these three learning approaches.
-
 
 The complete experiment results and a link to the source code can be found in Appendix A. 
 
@@ -30,28 +28,23 @@ The complete experiment results and a link to the source code can be found in Ap
 \end{table}
 
 
-
-\subsection{Batch size's effects on SimCLR are not apparent}
+\section{Batch size's effects on SimCLR are not apparent}
 
 The authors of SimCLR \cite{SimCLR} pointed out that contrastive learning benefits more from a larger batch size and longer training time. They used different batch sizes, 256, 512, 1024, 2048, 4096, and 8192, to train a ResNet-50 model. They found that these batch sizes are positively correlated with the model's performance, i.e., the larger the batch size, the better the performance of the model. This concept inspires subsequent self-supervised methods to attempt to use larger batch sizes for achieving better performance. 
 
-
 However, owing to computational power constraints, we only used 64 and 512 batch sizes (notice that DD uses 64 and 128). In addition, the sizes of the datasets we used are not large. The datasets contain less than 10,000 samples for model training. This makes the effect of the batch size less obvious in the SimCLR method. 
-
 
 In Figure \ref{fig:simclrbatch}, the results of the experiment are separated into two categories with two batch sizes. Each point represents the accuracy of supervised learning using different parameters. The performance of two batch sizes in SimCLR is compared, and the difference is not significant.
 
 From the above results, we can infer that the advantage of large batch sizes in contrastive learning, especially in the SimCLR model, may only be appreciable when the dataset is large. If the dataset is of medium or small size,  increasing the batch size may not improve model performance in self-supervised learning. Researchers could focus on other experiment factors.
 
-
 \begin{figure}[htbp]
- 
 \centering
-% \caption{Molecular Dataset\label{subfig:simclrbatch_mol}}
+\subcaptionbox{Molecular Dataset\label{subfig:simclrbatch_mol}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/3-MUTAG.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/3-NCI1.png}}
-% \caption{Bioinformatics Dataset\label{subfig:simclrbatch_bio}}
+\subcaptionbox{Bioinformatics Dataset\label{subfig:simclrbatch_bio}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/3-PROTEINS.png}\quad
         % \subcaptionbox{below\label{subfig:below}}
@@ -63,7 +56,6 @@ From the above results, we can infer that the advantage of large batch sizes in 
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,7 +63,7 @@ From the above results, we can infer that the advantage of large batch sizes in 
 
 
 
-\subsection{Deeper encoders have better performance}
+\section{Deeper encoders have better performance}
 
 Generally, models using a deep encoder are thought to have better performance than others using a shallow encoder. To judge this idea on graph datasets, we have tested three types of encoders, namely, monolayer, bilayer, and trilayer, during the training stage. 
 
@@ -79,17 +71,16 @@ For an encoder with a monolayer, the MLP part consists of a linear layer, follow
 
 Figure \ref{fig:deeper} shows that the medians and quartiles of accuracy are higher for models with deeper encoders. Such superior performance is particularly obvious when models are trained on the MUTAG, NCI1, and PROTEINS datasets.
 
-
 Following the experiment results, the hypothesis that the deeper encoder also benefits from the graph-structured model is verified through the analysis. Future self-supervised methods should concentrate on the deeper architecture.
 
 
 \begin{figure}[htbp]
 \centering
-% \subcaptionbox{Molecular Dataset\label{subfig:deeper_mol}}
+\subcaptionbox{Molecular Dataset\label{subfig:deeper_mol}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/4-MUTAG.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/4-NCI1.png}}
-% \subcaptionbox{Bioinformatics Dataset\label{subfig:deeper_bio}}
+\subcaptionbox{Bioinformatics Dataset\label{subfig:deeper_bio}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/4-PROTEINS.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/4-DD.png}}
@@ -103,14 +94,11 @@ Following the experiment results, the hypothesis that the deeper encoder also be
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Hidden dimension has little effect on model performance}
-
-
+\section{Hidden dimension has little effect on model performance}
 
 In most state-of-the-art neural networks, especially in image processing, NLP, and classification tasks, the hidden dimension of each encoder layer influences model performance. The hidden dimension determines the size of the feature vector. As the hidden dimension increases, an encoder can capture more complex features as hidden states, resulting in a more comprehensive representation of data.
 
 However, in our experiment, we tested 64 and 512 hidden dimensions for models trained on the MUTAG, NCI1, and PROTEINS and tested 64 and 128 for models trained on the DD dataset. Figure \ref{fig:hidden} shows that accuracy varies across different hidden dimensions. For models with 512 hidden dimensions, even if the vector size is eight times larger than those with 64 hidden dimensions, there is no significant improvement in model performance. 
-
 
 These surprising differences can be explained in part by the data structure of graph and image data. For image data, which consist of discrete pixels, with a larger hidden dimension, a neuron can capture more information via pixel clustering. However, graph data are more abstract. Nodes and edges cannot be separated or unified as pixel groups in image data. This difference makes adding hidden dimensions less effective in model training. 
 
@@ -119,11 +107,11 @@ In summary, if we want to apply a self-supervised method to graph data, increasi
 
 \begin{figure}[htbp]
 \centering
-% \subcaptionbox{Molecular Dataset\label{subfig:hidden_mol}}
+\subcaptionbox{Molecular Dataset\label{subfig:hidden_mol}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/5-MUTAG.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/5-NCI1.png}}
-% \subcaptionbox{Bioinformatics Dataset\label{subfig:hidden_bio}}
+\subcaptionbox{Bioinformatics Dataset\label{subfig:hidden_bio}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/5-PROTEINS.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/5-DD.png}}
@@ -137,11 +125,9 @@ In summary, if we want to apply a self-supervised method to graph data, increasi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{SimCLR performs better in molecular datasets}
-
+\section{SimCLR performs better in molecular datasets}
 
 In our experiments, we used four datasets, of which two, MUTAG and NCI1, are molecular datasets. The other two datasets, PROTEINS and DD, are bioinformatics datasets. Figure \ref{fig:simclrbetter} shows that models trained via SimCLR performed better than models trained via the other approaches on both molecular datasets. Conversely, models trained via SimCLR did not outperform models trained via Barlow Twins and Simsiam on bioinformatics datasets.
-
 
 Reviewing these datasets will help us understand why performance varies. Although these data are graph-structured, there are fundamental differences between molecular and bioinformatics graph data. In molecular datasets, e.g., MUTAG and NCI1, each node represents an atom, and each edge represents a chemical bond connecting two nodes. In bioinformatics datasets, such as PROTEINS and DD, each node represents an amino acid, and two nodes are connected by an edge if they are less than 6 angstroms apart.
 
@@ -152,11 +138,11 @@ The experimental results indicate that SimCLR is a suitable application model fo
 
 \begin{figure}
 \centering
-% \subcaptionbox{Molecular Dataset\label{subfig:simclrbetter_mol}}
+\subcaptionbox{Molecular Dataset\label{subfig:simclrbetter_mol}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/1-MUTAG.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/1-NCI1.png}}
-% \subcaptionbox{Bioinformatics Dataset\label{subfig:simclrbetter_bio}}
+\subcaptionbox{Bioinformatics Dataset\label{subfig:simclrbetter_bio}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/1-PROTEINS.png}\quad
         % \subcaptionbox{below\label{subfig:below}}
@@ -171,33 +157,27 @@ The experimental results indicate that SimCLR is a suitable application model fo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{SUBGRAPH augmentation performs closer in bioinformatics dataset}
-
+\section{SUBGRAPH augmentation performs closer in bioinformatics dataset}
 
 Furthermore, there is an interesting discovery in our experiment results. The idea behind data augmentation, especially in the SUBGRAPH operator, assumes that the partial graph should retain the properties of the entire graph, even when some nodes or edges are added or removed.  
 
 From Figure \ref{fig:stable} shows that models trained using the SUBGRAPH operator achieve similar performance on the DD and PROTEINS datasets. The variance in performance was lower than those on the molecular datasets.
 
-
-
 As previously mentioned, molecular and bioinformatics datasets have different properties and targets. First, the goal of MUTAG is to train models to predict the mutagenicity of Salmonella typhimurium. Second, the goal of NCI1 is to train models to classify whether a chemical compound is positive or negative for cell lung cancer. Third, the goal of the PROTEINS and DD datasets is to train models to predict which proteins are enzymes or non-enzymes.
 
 In a chemical molecule, each node and edge play a unique role. The functional group may be lost if we only capture a part of the graph. For example, the chemical formula of ethanol (a.k.a. alcohol) is $\text{C}_{2}\text{H}_{5}\text{OH}$, containing a hydroxyl group (-OH). If the augmented operator samples $\text{C}_{2}\text{H}_{4}$, it will be recognized as ethene, which has different chemical properties from ethanol. Because the augmented data have more diversity, the performance of the model will have a higher variance.
 
-
 In contrast, a protein contains at least one long polypeptide, which is chained by amino acid. Proteins can be constructed in flexible ways \cite{accurateprotein}. Some proteins chained by different polypeptides can have similar chemical properties and functions. Therefore, even when we use the SUBGRAPH operator, the augmented data are similar to the raw data, reducing the variance between experiment results.
-
-
 
 This finding, while preliminary, suggests that augmented data generated using the SUBGRAPH operator should be carefully used. To avoid a good experiment result producing trivial analysis, we should first observe the representation of each node and edge and consider their chemical and physic attributes before attempting to sample raw data as augmentation data.
 
 \begin{figure}
 \centering
-% \subcaptionbox{Molecular Dataset\label{subfig:stable_mol}}
+\subcaptionbox{Molecular Dataset\label{subfig:stable_mol}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/2-MUTAG.png}\quad
         \includegraphics[width = .48\linewidth]{./figures/2-NCI1.png}}
-% \subcaptionbox{Bioinformatics Dataset\label{subfig:stable_bio}}
+\subcaptionbox{Bioinformatics Dataset\label{subfig:stable_bio}}
     {%
         \includegraphics[width = .48\linewidth]{./figures/2-PROTEINS.png}\quad
         % \subcaptionbox{below\label{subfig:below}}
@@ -213,7 +193,7 @@ This finding, while preliminary, suggests that augmented data generated using th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Discussion}
+\section{Discussion}
 
 Most studies on self-supervised learning have only been conducted in image processing and NLP. In this chapter, we have revised the properties of graph data, analyzed the experimental results, and attempted to provide some possible explanations. 
 

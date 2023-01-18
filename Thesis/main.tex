@@ -1,81 +1,57 @@
-\documentclass[11pt]{article}
+% !TEX TS-program = xelatex
+% !BIB program = bibtex
+% !TEX encoding = UTF-8 Unicode
 
-\usepackage[english]{babel}			
-\usepackage[utf8]{inputenc}									
-\usepackage[T1]{fontenc}									
-\usepackage{tabularx}
-\usepackage{amsmath, amsthm, amssymb}   
-\usepackage{ulem, CJKulem}              
-\usepackage{booktabs}                  
-\usepackage{multirow}   
-\usepackage{multicol}
-\usepackage{diagbox}                   
-\usepackage{array}                    
-\usepackage{longtable}                
-\usepackage{paralist}              
-\usepackage{makecell}
-\usepackage{chngpage}
-\usepackage{graphicx}
-\usepackage{subfigure}
-\usepackage[backref]{hyperref}
-\usepackage{caption} 
-\captionsetup[table]{skip=10pt}
-\usepackage{subfig, epsfig, tikz, float}		
-\usepackage[square]{natbib}
+\documentclass[
+  twoside,
+  openright,
+  degree    = master,               % degree = master | doctor
+  language  = english,              % language = chinese | english
+  fontset   = template,             % fontset = default | template | system | overleaf
+  watermark = false,                 % watermark = true | false
+  doi       = false,                 % doi = true | false
+]{ntuthesis}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\textwidth 13.5cm
-\textheight 19.5cm
-\columnsep .5cm
-
-\title{
-\renewcommand{\baselinestretch}{1.17}\normalsize\bf%
-\uppercase{Training Graph Neural Networks via Self-Supervised Learning: Experiments and Analysis}
-}
-
-\author{Ho Ching-Ru$^{*}$}
+\input{ntusetup}
 
 \begin{document}
 
-\date{}
-\maketitle
+% 封面與口試審定
+% Cover and Verification Letter
+\makecover                          % 論文封面（Cover）
+\makeverification                   % 口試委員審定書（Verification Letter）
 
-\vspace{-0.5cm}
+% 致謝與論文摘要
+% Acknowledgement and Abstract
+\input{front/acknowledgement}       % 致謝（Acknowledgement）
+\input{front/abstract}              % 摘要（Abstract）
 
-\begin{center}
-{\footnotesize 
-$^{*}$M.S. in Data Science Degree Program,\\ National Taiwan University and Academia Sinica.  \\
-E-mail: r09946006@ntu.edu.tw \\
-Advisor: Yen Tso-Jung (Institute of Statistical Science, Academia Sinica)\\
-Oral Exam Date: July 4th, 2022
-}
-\end{center}
+% 生成目錄與符號列表
+% Contents of Tables and Denotation
+\maketableofcontents                % 目錄（Table of Contents）
+\makelistoffigures                  % 圖目錄（List of Figures）
+\makelistoftables                   % 表目錄（List of Tables）
+% \input{front/denotation}            % 符號列表（Denotation）
 
-\bigskip
-\input{front/abstract.tex}
+% 論文內容
+% Contents of Thesis
+\mainmatter
+\input{contents/chapter01}
+\input{contents/chapter02}
+\input{contents/chapter03}
+\input{contents/chapter04}
+\input{contents/chapter05}
 
-\medskip
-{\small{\bf Keywords}{:} 
-self-supervised learning, graph neural network, encoder training
-}
 
-\baselineskip=\normalbaselineskip
+% 參考文獻
+% References
+\refmatter
+\bibliographystyle{abbrv}
+\bibliography{back/references}
 
-\input{contents/chapter01.tex}
-\newpage
-\input{contents/chapter02.tex}
-\newpage
-\input{contents/chapter03.tex}
-\newpage
-\input{contents/chapter04.tex}
-\newpage
-\input{contents/chapter05.tex}
-\newpage
-\input{back/appendix01.tex}
-\newpage
-\bibliographystyle{ieeetr} 
-\newpage
-\bibliography{ref.bib} 
+% 附錄
+% Appendices
+\input{back/appendix01}
+% \input{back/appendix02}
 
 \end{document}
